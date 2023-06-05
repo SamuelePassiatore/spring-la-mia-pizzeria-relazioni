@@ -113,6 +113,11 @@ public class Pizza {
 		setIngredients(Arrays.asList(ingredients));
 	}
 	
+	public void deleteIngredient(Ingredient ingredient) {
+		getIngredients().remove(ingredient);		
+	}
+
+	
 	@Override
 	public String toString() {
 		
