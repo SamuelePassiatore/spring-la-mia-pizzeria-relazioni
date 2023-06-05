@@ -17,6 +17,7 @@
 			th:object="${ingredient}"
 		>
 			[[ *{name} ]] => 
+			<a th:href="@{/ingredients/update/{id} (id=*{id})}">Modifica</a>
 			<a th:href="@{/ingredients/delete/{id} (id = *{id})}">Elimina</a>
 			<h4>Pizze: [[ *{pizze.size()} ]]</h4>
 			<ul>

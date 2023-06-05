@@ -3,7 +3,9 @@ package org.example.pizzeria.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.example.pizzeria.pojo.Ingredient;
 import org.example.pizzeria.pojo.Pizza;
+import org.example.pizzeria.serv.IngredientServ;
 import org.example.pizzeria.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,9 @@ public class PizzaController {
 		@Autowired
 		private PizzaService pizzaService;
 		
+		@Autowired
+		private IngredientServ ingredientServ;
+
 		@GetMapping("/")
 		public String home() {
 			return "home";
@@ -66,7 +71,11 @@ public class PizzaController {
 		@GetMapping("/pizze/create")
 		public String createPizza(Model model) {
 			
+			List<Ingredient> ingredients = ingredientServ.findAll();
+			
 			model.addAttribute("pizza", new Pizza());
+			model.addAttribute("ingredients", ingredients);
+			
 			return "pizza_create";
 		}
 
@@ -98,10 +107,13 @@ public class PizzaController {
 				Model model,
 				@PathVariable int id
 			) {
-
+			
+			List<Ingredient> ingredients = ingredientServ.findAll();
+			
 			Optional<Pizza> pizzaOpt = pizzaService.findById(id);
 			Pizza pizza = pizzaOpt.get();
 			model.addAttribute("pizza", pizza);
+			model.addAttribute("ingredients", ingredients);
 
 			return "pizza_update";
 		}

@@ -49,6 +49,11 @@
 			[[ ${errors.getFieldError('prezzo').defaultMessage} ]]
 			</label>
 		</div>
+		<div class="fw-bold">Ingredienti: </div>
+		<div class="py-3" th:each="ingredient : ${ingredients}" th:object="${ingredient}">
+			<input th:id="${'ingredient-' + ingredient.id}" type="checkbox" th:value="*{id}" name="ingredients">
+			<label th:id="${'ingredient-' + ingredient.id}">[[ *{name} ]]</label>
+		</div>
 		<input class="btn btn-small btn-secondary" type="submit" value="Crea">
 		<a class="btn btn-small btn-white border border-dark b-2" th:href="@{/pizze}">Torna indietro</a>
 	</form>
